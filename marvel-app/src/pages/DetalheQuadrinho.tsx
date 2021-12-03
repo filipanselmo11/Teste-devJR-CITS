@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { useLocation } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -14,13 +14,6 @@ export default function DetalheQuadrinho() {
   const quadrinho = location.state.data;
   console.log(quadrinho);
 
-  const [expanded, setExpanded] = useState<string | false>(false);
-
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
-
   return (
     <div>
       <Box>
@@ -34,52 +27,104 @@ export default function DetalheQuadrinho() {
               alt={quadrinho.title}
             />
           </Paper>
-          {quadrinho.creators
-            ? quadrinho.creators.items[0].name
-            : "Criador Indisponível"}
-          {quadrinho.pageCount ? quadrinho.pageCount : "Página Indisponível"}
-          {quadrinho.format ? quadrinho.format : "Formato Indisponível"}
-          {quadrinho.series
-            ? quadrinho.series.name
-            : "Nome da Série Indisponível"}
-          {quadrinho.description
-            ? quadrinho.description
-            : "Descrição Indisponível"}
-          {quadrinho.prices[0]
-            ? quadrinho.prices[0].price
-            : "Preço Indisponível"}
+        </Container>
+        <Container maxWidth="sm">
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Criador</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.creators
+                  ? quadrinho.creators.items[0].name
+                  : "Criador Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography>Páginas</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.pageCount
+                  ? quadrinho.pageCount
+                  : "Quantidade de Páginas Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel3a-content"
+              id="panel3a-header"
+            >
+              <Typography>Formato</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.format ? quadrinho.format : "Formato Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel4a-content"
+              id="panel4a-header"
+            >
+              <Typography>Série</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.series
+                  ? quadrinho.series.name
+                  : "Nome da Série Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel5a-content"
+              id="panel5a-header"
+            >
+              <Typography>Descrição</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.description
+                  ? quadrinho.description
+                  : "Descrição Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel6a-content"
+              id="panel6a-header"
+            >
+              <Typography>Preço</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {quadrinho.prices[0]
+                  ? quadrinho.prices[0].price
+                  : "Preço Indisponível"}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         </Container>
       </Box>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}></Typography>
-          <Typography sx={{ color: "text.secondary" }}>
-            I am an accordion
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-heaeder"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-      </Accordion>
     </div>
   );
 }
